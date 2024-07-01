@@ -61,7 +61,7 @@ def create_form(form: FormObject):
     print(form.json())
     with open("db.json", "r") as file:
         primary_data = json.loads(file.read())
-    primary_data[form_id] = {"url": form.url, "data": {}}
+    primary_data[form_id] = {"url": str(form.url).replace("usp=sf_link", "embedded=true"), "data": {}}
     with open("db.json", "w") as file:
         file.write(json.dumps(primary_data))
     return {"id": form_id}
@@ -73,9 +73,4 @@ def url_route(form_id: str):
 @app.get("/report/{form_id}/{student_name}/{date}")
 def report_route(form_id: str, student_name: str, date: str):
     report_to_db(form_id, student_name, date)
-    # if credentials not in cheating_data[form_id]:
-    #     cheating_data[form_id].append({credentials: 0})
-    # else:
-    #     cheating_data[form_id][credentials] += 1
-    # print(cheating_data[form_id])
     return {"status": "OK"}
