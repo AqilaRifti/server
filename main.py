@@ -45,6 +45,10 @@ def get_url_from_form_id(form_id: str):
         primary_data = json.loads(file.read())
     return primary_data[form_id]["url"]
 
+@app.get()
+def root():
+    return {"status": "UP"}
+
 @app.get("/get/report/{form_id}")
 def get_report(form_id: str):
     with open ("db.json", "r") as file:
