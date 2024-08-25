@@ -68,7 +68,7 @@ def create_form(form: FormObject):
 def url_route(form_id: str):
     return {"url": get_url_from_form_id(form_id)}
 
-@app.get("/report/{form_id}/{student_name}/{date}/method")
+@app.get("/report/{form_id}/{student_name}/{date}/{method}")
 def report_route(form_id: str, student_name: str, date: str, method: str):
     report_to_db(form_id, student_name, date, method)
     return {"status": "OK"}
